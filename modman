@@ -1,0 +1,5 @@
+src/app/code/core/Mage/Cms/ 					                        app/code/core/Mage/Cms/
+src/app/design/frontend/base/default/layout/cms.xml 	                app/design/frontend/base/default/layout/cms.xml
+src/app/design/frontend/base/default/template/cms/                      app/design/frontend/base/default/template/cms/
+src/app/etc/modules/Mage_Cms.xml 				                        app/etc/modules/Mage_Cms.xml
+src/app/locale/en_US/Mage_Cms.csv 				                        app/locale/en_US/Mage_Cms.csv
