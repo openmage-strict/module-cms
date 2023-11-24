@@ -1,7 +1,10 @@
 {
     "name": "openmage-strict/module-cms",
+    "description": "Mage_Cms",
+    "license": "OSL-3.0",
     "type": "magento-module",
     "require": {
+        "magento-hackathon/magento-composer-installer": "*",
         "openmage-strict/module-uploader": "*"
     }
 }
