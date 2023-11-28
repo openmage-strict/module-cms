@@ -18,7 +18,7 @@
 <layout>
     <adminhtml_cms_page_index>
         <reference name="content">
-            <block type="adminhtml/cms_page" name="cms_page"></block>
+            <block type="adminhtml/cms_page" name="cms_page"/>
         </reference>
     </adminhtml_cms_page_index>
 
@@ -29,7 +29,7 @@
     <adminhtml_cms_page_edit>
         <update handle="editor"/>
         <reference name="content">
-            <block type="adminhtml/cms_page_edit" name="cms_page_edit"></block>
+            <block type="adminhtml/cms_page_edit" name="cms_page_edit"/>
         </reference>
         <reference name="left">
             <block type="adminhtml/cms_page_edit_tabs" name="cms_page_edit_tabs">
@@ -47,7 +47,7 @@
 
     <adminhtml_cms_block_index>
         <reference name="content">
-            <block type="adminhtml/cms_block" name="cms_block"></block>
+            <block type="adminhtml/cms_block" name="cms_block"/>
         </reference>
     </adminhtml_cms_block_index>
 
@@ -58,7 +58,7 @@
     <adminhtml_cms_block_edit>
         <update handle="editor"/>
         <reference name="content">
-            <block type="adminhtml/cms_block_edit" name="cms_block_edit"></block>
+            <block type="adminhtml/cms_block_edit" name="cms_block_edit"/>
         </reference>
     </adminhtml_cms_block_edit>
 
