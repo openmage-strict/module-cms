@@ -215,6 +215,8 @@ class Mage_Cms_Model_Resource_Page extends Mage_Core_Model_Resource_Db_Abstract
      *
      * @param Mage_Core_Model_Abstract|Mage_Cms_Model_Page $object
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getIsUniquePageToStores(Mage_Core_Model_Abstract $object)
     {
@@ -306,10 +308,10 @@ class Mage_Cms_Model_Resource_Page extends Mage_Core_Model_Resource_Db_Abstract
     /**
      * Retrieves cms page title from DB by passed id.
      *
-     * @param string $id
+     * @param string $pageId
      * @return string
      */
-    public function getCmsPageTitleById($id)
+    public function getCmsPageTitleById($pageId)
     {
         $adapter = $this->_getReadAdapter();
 
@@ -318,7 +320,7 @@ class Mage_Cms_Model_Resource_Page extends Mage_Core_Model_Resource_Db_Abstract
             ->where('page_id = :page_id');
 
         $binds = [
-            'page_id' => (int) $id
+            'page_id' => (int) $pageId
         ];
 
         return $adapter->fetchOne($select, $binds);
@@ -327,10 +329,10 @@ class Mage_Cms_Model_Resource_Page extends Mage_Core_Model_Resource_Db_Abstract
     /**
      * Retrieves cms page identifier from DB by passed id.
      *
-     * @param string $id
+     * @param string $pageId
      * @return string|false
      */
-    public function getCmsPageIdentifierById($id)
+    public function getCmsPageIdentifierById($pageId)
     {
         $adapter = $this->_getReadAdapter();
 
@@ -339,7 +341,7 @@ class Mage_Cms_Model_Resource_Page extends Mage_Core_Model_Resource_Db_Abstract
             ->where('page_id = :page_id');
 
         $binds = [
-            'page_id' => (int) $id
+            'page_id' => (int) $pageId
         ];
 
         return $adapter->fetchOne($select, $binds);

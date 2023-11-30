@@ -72,10 +72,10 @@ class Mage_Cms_Model_Page extends Mage_Core_Model_Abstract
     /**
      * Page's Statuses
      */
-    public const STATUS_ENABLED = 1;
+    public const STATUS_ENABLED  = 1;
     public const STATUS_DISABLED = 0;
 
-    public const CACHE_TAG              = 'cms_page';
+    public const CACHE_TAG       = 'cms_page';
     protected $_cacheTag         = 'cms_page';
 
     /**
@@ -93,12 +93,12 @@ class Mage_Cms_Model_Page extends Mage_Core_Model_Abstract
     /**
      * @inheritDoc
      */
-    public function load($id, $field = null)
+    public function load($value, $field = null)
     {
-        if (is_null($id)) {
+        if (is_null($value)) {
             return $this->noRoutePage();
         }
-        return parent::load($id, $field);
+        return parent::load($value, $field);
     }
 
     /**

@@ -18,6 +18,8 @@
  *
  * @category   Mage
  * @package    Mage_Cms
+ *
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
 {
@@ -44,6 +46,9 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
      *
      * @param string $path Parent directory path
      * @return Varien_Data_Collection_Filesystem
+     *
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function getDirsCollection($path)
     {
@@ -190,8 +195,8 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
             Mage::throwException(Mage::helper('cms')->__('A directory with the same name already exists. Please try another folder name.'));
         }
 
-        $io = new Varien_Io_File();
-        if ($io->mkdir($newPath)) {
+        $file = new Varien_Io_File();
+        if ($file->mkdir($newPath)) {
             if (Mage::helper('core/file_storage_database')->checkDbUsage()) {
                 $relativePath = Mage::helper('core/file_storage_database')->getMediaRelativePath($newPath);
                 Mage::getModel('core/file_storage_directory_database')->createRecursive($relativePath);
@@ -218,12 +223,12 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
         $rootCmp = rtrim($this->getHelper()->getStorageRoot(), DS);
         $pathCmp = rtrim($path, DS);
 
-        $io = new Varien_Io_File();
+        $file = new Varien_Io_File();
 
         if ($rootCmp == $pathCmp) {
             Mage::throwException(Mage::helper('cms')->__(
                 'Cannot delete root directory %s.',
-                $io->getFilteredPath($path)
+                $file->getFilteredPath($path)
             ));
         }
         if (str_contains($pathCmp, chr(0))
@@ -235,12 +240,12 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
         if (Mage::helper('core/file_storage_database')->checkDbUsage()) {
             Mage::getModel('core/file_storage_directory_database')->deleteDirectory($path);
         }
-        if (!$io->rmdir($path, true)) {
-            Mage::throwException(Mage::helper('cms')->__('Cannot delete directory %s.', $io->getFilteredPath($path)));
+        if (!$file->rmdir($path, true)) {
+            Mage::throwException(Mage::helper('cms')->__('Cannot delete directory %s.', $file->getFilteredPath($path)));
         }
 
         if (str_starts_with($pathCmp, $rootCmp)) {
-            $io->rmdir($this->getThumbnailRoot() . DS . ltrim(substr($pathCmp, strlen($rootCmp)), '\\/'), true);
+            $file->rmdir($this->getThumbnailRoot() . DS . ltrim(substr($pathCmp, strlen($rootCmp)), '\\/'), true);
         }
     }
 
@@ -252,13 +257,13 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
      */
     public function deleteFile($target)
     {
-        $io = new Varien_Io_File();
-        $io->rm($target);
+        $file = new Varien_Io_File();
+        $file->rm($target);
         Mage::helper('core/file_storage_database')->deleteFile($target);
 
         $thumb = $this->getThumbnailPath($target, true);
         if ($thumb) {
-            $io->rm($thumb);
+            $file->rm($thumb);
             Mage::helper('core/file_storage_database')->deleteFile($thumb);
         }
         return $this;
@@ -311,9 +316,11 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
     /**
      * Thumbnail path getter
      *
-     * @param  string $filePath original file path
+     * @param string $filePath original file path
      * @param bool $checkFile OPTIONAL is it necessary to check file availability
      * @return string | false
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function getThumbnailPath($filePath, $checkFile = false)
     {
@@ -333,9 +340,11 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
     /**
      * Thumbnail URL getter
      *
-     * @param  string $filePath original file path
+     * @param string $filePath original file path
      * @param bool $checkFile OPTIONAL is it necessary to check file availability
      * @return string|false
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function getThumbnailUrl($filePath, $checkFile = false)
     {
@@ -358,6 +367,8 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
      * @param string $source Image path to be resized
      * @param bool $keepRation Keep aspect ratio or not
      * @return bool|string Resized filepath or false if errors were occurred
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function resizeFile($source, $keepRation = true)
     {
@@ -366,11 +377,11 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
         }
 
         $targetDir = $this->getThumbsPath($source);
-        $io = new Varien_Io_File();
-        if (!$io->isWriteable($targetDir)) {
-            $io->mkdir($targetDir);
+        $file = new Varien_Io_File();
+        if (!$file->isWriteable($targetDir)) {
+            $file->mkdir($targetDir);
         }
-        if (!$io->isWriteable($targetDir)) {
+        if (!$file->isWriteable($targetDir)) {
             return false;
         }
         $image = Varien_Image_Adapter::factory('GD2');
@@ -414,6 +425,8 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
      *
      * @param false|string $filePath Path to the file
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function getThumbsPath($filePath = false)
     {
@@ -480,6 +493,8 @@ class Mage_Cms_Model_Wysiwyg_Images_Storage extends Varien_Object
      * @param string $key
      * @param mixed $default
      * @return mixed
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function getConfigData($key, $default = false)
     {
