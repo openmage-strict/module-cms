@@ -115,12 +115,12 @@ class Mage_Cms_Helper_Wysiwyg_Images extends Mage_Core_Helper_Abstract
     /**
      * Decode HTML element id
      *
-     * @param string $id
+     * @param string $elementId
      * @return string
      */
-    public function convertIdToPath($id)
+    public function convertIdToPath($elementId)
     {
-        $path = $this->idDecode($id);
+        $path = $this->idDecode($elementId);
         $storageRoot = realpath($this->getStorageRoot());
         if (!strstr($path, $storageRoot)) {
             $path = $storageRoot . DS . $path;
@@ -134,6 +134,8 @@ class Mage_Cms_Helper_Wysiwyg_Images extends Mage_Core_Helper_Abstract
      * @param string $path Original path
      * @param bool $trim Trim slashes or not
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function correctPath($path, $trim = true)
     {
@@ -177,6 +179,8 @@ class Mage_Cms_Helper_Wysiwyg_Images extends Mage_Core_Helper_Abstract
      * @param string $filename Filename transferred via Ajax
      * @param bool $renderAsTag Leave image HTML as is or transform it to controller directive
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function getImageHtmlDeclaration($filename, $renderAsTag = false)
     {
@@ -214,11 +218,11 @@ class Mage_Cms_Helper_Wysiwyg_Images extends Mage_Core_Helper_Abstract
                     $currentPath = $path;
                 }
             }
-            $io = new Varien_Io_File();
-            if (!$io->isWriteable($currentPath) && !$io->mkdir($currentPath)) {
+            $file = new Varien_Io_File();
+            if (!$file->isWriteable($currentPath) && !$file->mkdir($currentPath)) {
                 $message = Mage::helper('cms')->__(
                     'The directory %s is not writable by server.',
-                    $io->getFilteredPath($currentPath)
+                    $file->getFilteredPath($currentPath)
                 );
                 Mage::throwException($message);
             }

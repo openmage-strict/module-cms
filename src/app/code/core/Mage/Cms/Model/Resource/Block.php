@@ -159,6 +159,8 @@ class Mage_Cms_Model_Resource_Block extends Mage_Core_Model_Resource_Db_Abstract
      *
      * @param Mage_Core_Model_Abstract $object
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.BooleanGetMethodName)
      */
     public function getIsUniqueBlockToStores(Mage_Core_Model_Abstract $object)
     {
@@ -191,10 +193,10 @@ class Mage_Cms_Model_Resource_Block extends Mage_Core_Model_Resource_Db_Abstract
     /**
      * Get store ids to which specified item is assigned
      *
-     * @param int $id
+     * @param int $blockId
      * @return array
      */
-    public function lookupStoreIds($id)
+    public function lookupStoreIds($blockId)
     {
         $adapter = $this->_getReadAdapter();
 
@@ -203,7 +205,7 @@ class Mage_Cms_Model_Resource_Block extends Mage_Core_Model_Resource_Db_Abstract
             ->where('block_id = :block_id');
 
         $binds = [
-            ':block_id' => (int) $id
+            ':block_id' => (int) $blockId
         ];
 
         return $adapter->fetchCol($select, $binds);

@@ -62,6 +62,7 @@ class Mage_Cms_Model_Resource_Page_Collection extends Mage_Core_Model_Resource_D
         foreach ($this as $item) {
             $identifier = $item->getData('identifier');
 
+            $data = [];
             $data['value'] = $identifier;
             $data['label'] = $item->getData('title');
 
@@ -82,6 +83,8 @@ class Mage_Cms_Model_Resource_Page_Collection extends Mage_Core_Model_Resource_D
      *
      * @param bool $flag
      * @return $this
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function setFirstStoreFlag($flag = false)
     {
@@ -131,6 +134,8 @@ class Mage_Cms_Model_Resource_Page_Collection extends Mage_Core_Model_Resource_D
      * @param int|Mage_Core_Model_Store $store
      * @param bool $withAdmin
      * @return $this
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function addStoreFilter($store, $withAdmin = true)
     {

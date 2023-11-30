@@ -48,6 +48,10 @@ class Mage_Cms_Helper_Page extends Mage_Core_Helper_Abstract
      * @param string $pageId
      * @param bool $renderLayout
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     protected function _renderPage(Mage_Core_Controller_Varien_Action  $action, $pageId = null, $renderLayout = true)
     {
@@ -137,6 +141,8 @@ class Mage_Cms_Helper_Page extends Mage_Core_Helper_Abstract
      * @param string $pageId
      * @param bool $renderLayout
      * @return bool
+     *
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public function renderPageExtended(Mage_Core_Controller_Varien_Action $action, $pageId = null, $renderLayout = true)
     {
